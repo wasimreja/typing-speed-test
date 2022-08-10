@@ -24,16 +24,24 @@ const Home = () => {
   const [sentenceArr, setSentenceArr] = useState([]);
   const [speed, setSpeed] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
-  const [checked, setChecked] = useState(30);
+  const [checked, setChecked] = useState(15);
+  const [highest, setHighest] = useState(0);
+  const [last, setLast] = useState(0);
   const inputRef = useRef(null);
 
   const getRandomWords = (n) => {
+    if (!n) n = checked;
     let random = words.sort(() => 0.5 - Math.random()).slice(0, n);
     setSentenceArr(random);
     inputRef.current.focus();
   };
   useEffect(() => {
-    getRandomWords(30);
+    const localhigest = localStorage.getItem("highest");
+    if (localhigest) setHighest(localhigest);
+    const localChecked = localStorage.getItem("checked");
+    if (localChecked) setChecked(Number(localChecked));
+    getRandomWords(localChecked);
+    //eslint-disable-next-line
   }, []);
   const handleInput = (e) => {
     const tempInput = e.target.value;
@@ -41,9 +49,10 @@ const Home = () => {
     setInputValue(tempInput);
     if (current === checked - 1 && tempInput === sentenceArr[checked - 1]) {
       handleSubmit(tempInput);
-      current++;
-      // clearInterval(timer);
-      // timeRunning = false;
+      setLast(speed)
+      localStorage.setItem("highest", Math.max(highest, speed));
+      if (highest < speed) setHighest(speed);
+      else setHighest(Number(localStorage.getItem("highest")));
       timerClearer();
       setInputValue("");
       return;
@@ -57,11 +66,18 @@ const Home = () => {
       correct[current] = 1;
       correctNumber++;
     } else correct[current] = -1;
-    console.log(current + 1);
+    
     setAccuracy(((correctNumber / (current + 1)) * 100).toFixed(0));
+    current++;
+
+    if (current === sentenceArr.length) {
+      // timerClearer();
+      restart(checked);
+    }
   };
   const handleKeyPress = (e) => {
-    if (e.key !== " " || e.target.value.trim() === "") return false;
+    if (e.key !== " " || current === checked || e.target.value.trim() === "")
+      return false;
     if (!timeRunning && current < sentenceArr.length) {
       timeRunning = true;
       timer = setInterval(() => {
@@ -71,13 +87,12 @@ const Home = () => {
     }
     handleSubmit();
     setInputValue("");
-    current++;
+    // current++;
 
-    if (current === sentenceArr.length) {
-      // clearInterval(timer);
-      // timeRunning = false;
-      timerClearer();
-    }
+    // if (current === sentenceArr.length) {
+    //   // timerClearer();
+    //   restart(checked)
+    // }
   };
   const timerClearer = () => {
     clearInterval(timer);
@@ -96,6 +111,7 @@ const Home = () => {
   const handleRadio = (e) => {
     const value = e.target.value;
     restart(value);
+    localStorage.setItem("checked", Number(value));
     setChecked(Number(value));
   };
   return (
@@ -149,7 +165,10 @@ const Home = () => {
           </div>
         </form>
         <div className="sentence-container">
-          <span className="speed"> Current speed (WPM): {speed}</span>
+        <span className="speed"> Current speed (WPM): {speed}
+            <span className="highest"> Last Round: {last}</span>
+            <span className="highest"> Highest: {highest}</span>
+          </span>
           <span className="speed accuracy"> Accuracy: {accuracy}%</span>
           {sentenceArr.map((word, index) => {
             return <Word key={index} word={word} index={index} />;

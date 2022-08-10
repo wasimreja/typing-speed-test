@@ -25,6 +25,41 @@ nav {
 
 .logo {
   font-size: 1.5rem;
+  display: inline-flex;
+  position: relative;
+}
+
+.logo::before,
+.logo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.logo::before {
+  background-color: #001a38;
+  animation: typewriter 3s steps(33) 1s forwards;
+}
+
+.logo::after {
+  width: 0.124em;
+  background-color: white;
+  animation: typewriter 3s steps(33) 1s forwards, blink 750ms steps(33) infinite;
+}
+
+@keyframes typewriter {
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes blink {
+  to {
+    background: transparent;
+  }
 }
 
 .home {
@@ -53,7 +88,7 @@ nav {
 
 .radio span {
   margin-left: 0.4rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .sentence-container {
@@ -75,15 +110,20 @@ nav {
 }
 
 .accuracy {
-  right: 1rem;
+  right: 2.5rem;
+}
+
+.highest {
+  margin-left: 2rem;
 }
 
 .type-input {
-  border: none;
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
   width: 30rem;
-  border: 1px solid rgb(173, 173, 173);
+  border: 2px solid rgb(173, 173, 173);
+  outline: none;
+  text-align: center;
   background: transparent;
   border-radius: 3px;
   color: white;
