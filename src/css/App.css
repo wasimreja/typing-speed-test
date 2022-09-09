@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #001a38;
+  background-color: #282a36;
 }
 
 a {
@@ -19,7 +19,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: white;
+  color: #ff79c6;
   padding: 1.5rem 2rem;
 }
 
@@ -40,13 +40,13 @@ nav {
 }
 
 .logo::before {
-  background-color: #001a38;
+  background-color: #282a36;
   animation: typewriter 3s steps(33) 1s forwards;
 }
 
 .logo::after {
   width: 0.124em;
-  background-color: white;
+  background-color: #f8f8f2;
   animation: typewriter 3s steps(33) 1s forwards, blink 750ms steps(33) infinite;
 }
 
@@ -69,7 +69,7 @@ nav {
 }
 
 .radio-container {
-  color: white;
+  color: #f8f8f2;
   width: 40%;
   display: flex;
   justify-content: space-between;
@@ -82,21 +82,35 @@ nav {
   align-items: center;
 }
 
-.radio input {
-  cursor: pointer;
-}
-
 .radio span {
   margin-left: 0.4rem;
   font-size: 1rem;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  padding: 2px;
+  background-clip: content-box;
+  border: 2px solid #44475a;
+  background-color: #f8f8f2;
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked {
+  background-color: #50fa7b;
 }
 
 .sentence-container {
   margin-top: 7rem;
   width: 70%;
   min-height: 1rem;
-  background-color: #002249;
-  color: white;
+  background-color: #44475a;
+  color: #f8f8f2;
   padding: 2rem 2.5rem;
   font-size: 1.5rem;
   margin-bottom: 5rem;
@@ -121,10 +135,10 @@ nav {
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
   width: 30rem;
-  border: 2px solid rgb(173, 173, 173);
+  border: 2px solid #44475a;
   outline: none;
   text-align: center;
   background: transparent;
   border-radius: 3px;
-  color: white;
+  color: #bd93f9;
 }

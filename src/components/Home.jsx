@@ -5,11 +5,11 @@ var correct = new Array(100).fill(0);
 const Word = ({ word, index }) => {
   var color;
   if (current === index) {
-    color = "orange";
+    color = "#f1fa8c";
   } else if (correct[index] === 1) {
-    color = "green";
+    color = "#50fa7b";
   } else if (correct[index] === -1) {
-    color = "red";
+    color = "#ff5555";
   }
 
   return <span style={{ color: color }}>{word} </span>;
@@ -118,7 +118,7 @@ const Home = () => {
     <>
       <div className="home">
         <form className="radio-container">
-          Select No. of words:
+          Select No. of Words:
           <div className="radio">
             <input
               type="radio"
