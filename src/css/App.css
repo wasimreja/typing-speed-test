@@ -102,7 +102,7 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked {
-  background-color: #50fa7b;
+  background-color: #ffb86c;
 }
 
 .sentence-container {
@@ -141,4 +141,31 @@ input[type="radio"]:checked {
   background: transparent;
   border-radius: 3px;
   color: #bd93f9;
+}
+
+.footer {
+  text-align: center;
+  font-size: 1.3em;
+  padding: 60px 0;
+  color: #f8f8f2;
+}
+
+.footer .love {
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  font-size: 1.4em;
+  color: #ff79c6;
+  transform: scale(0.9);
+  animation: love 0.5s linear infinite alternate-reverse;
+}
+
+.footer .green {
+  color: #50fa7b;
+}
+
+@keyframes love {
+  100% {
+    transform: scale(1.1);
+  }
 }

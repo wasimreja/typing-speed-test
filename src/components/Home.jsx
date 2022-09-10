@@ -184,6 +184,12 @@ const Home = () => {
           onKeyPress={handleKeyPress}
         />
       </div>
+      <div className="footer">
+        Made with <span class="love">♥</span> by{" "}
+        <a class="green" href="https://github.com/wasimreja/" target="_blank">
+          Wasim Reja
+        </a>
+      </div>
     </>
   );
 };
